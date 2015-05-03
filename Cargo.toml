@@ -1,0 +1,4 @@
+[package]
+name = "lispy-rust"
+version = "0.0.1"
+authors = ["Logan Engstrom <meadowstream@users.noreply.github.com>"]
