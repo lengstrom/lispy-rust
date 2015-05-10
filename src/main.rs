@@ -4,12 +4,14 @@ fn main() {
 	// Execute script from the command line
 }
 
-fn parse(code: &mut str) -> Vec<&str>{
+fn parse(code: &str) -> Vec<&str> {
 	// code.to_string()
-	let leftParenRe = Regex::new("\s*\(\s*").unwrap();
-	let rightParenRe = Regex::new("\s*\)\s*").unwrap();
-	let parsedCode = rightParenRe.replace_all(leftParenRe.replace_all(code, " ( ")," ) ")
-	parsedCode.split(" ")
+	let leftParenRe = regex::Regex::new(r"\s*\(\s*").unwrap();
+	let rightParenRe = regex::Regex::new(r"\s*\)\s*").unwrap();
+	let partialParsedCode = leftParenRe.replace_all(code, r" ( ");
+	let parsedCode = rightParenRe.replace_all(partialParsedCode.as_slice()," ) ");
+	// let parsedCode = code.replace(" (", "(").replace("( ", "(").replace("(", " ( ").replace()
+	parsedCode.as_slice().split(" ").collect()
 }
 
 fn tokenize() {
