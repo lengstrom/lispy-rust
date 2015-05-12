@@ -6,12 +6,16 @@ fn main() {
 
 fn parse(code: &str) -> Vec<&str> {
 	// code.to_string()
+	
+	// let parsedCode = code.replace(" (", "(").replace("( ", "(").replace("(", " ( ").replace()
+	parsedCode.as_slice().split(" ").collect()
+}
+
+fn format_code(code: &str) -> &str {
 	let leftParenRe = regex::Regex::new(r"\s*\(\s*").unwrap();
 	let rightParenRe = regex::Regex::new(r"\s*\)\s*").unwrap();
 	let partialParsedCode = leftParenRe.replace_all(&code, " ( ");
-	let parsedCode = rightParenRe.replace_all(&partialParsedCode," ) ");
-	// let parsedCode = code.replace(" (", "(").replace("( ", "(").replace("(", " ( ").replace()
-	parsedCode.as_slice().split(" ").collect()
+	(rightParenRe.replace_all(&partialParsedCode," ) ")).as_slice()
 }
 
 fn tokenize() {
