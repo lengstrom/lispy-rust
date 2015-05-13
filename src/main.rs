@@ -1,34 +1,30 @@
 extern crate regex;
 
 fn main() {
+	println!("!!!!");
+	let input = "(begin (define r 10) (* pi (* r r)))";
+	let parsed_code = parse(input);
+	println!("{}", parsed_code);
 	// Execute script from the command line
 }
 
-fn parse(code: &str) -> Vec<&str> {
+fn parse(code: &str) -> String {
 	// code.to_string()
-	
-	// let parsedCode = code.replace(" (", "(").replace("( ", "(").replace("(", " ( ").replace()
-	parsedCode.as_slice().split(" ").collect()
+	let left_paren_re = regex::Regex::new(r"\s*\(\s*").unwrap();
+	let right_paren_re = regex::Regex::new(r"\s*\)\s*").unwrap();
+	let partial_parsed_code = left_paren_re.replace_all(&code, " ( ");
+	let parsed_code = right_paren_re.replace_all(&partial_parsed_code," ) ");
+	// let parsed_code = code.replace(" (", "(").replace("( ", "(").replace("(", " ( ").replace()
+	let final_string : String = parsed_code.split(" ").collect();
+	final_string.clone()
 }
 
-fn format_code(code: &str) -> &str {
-	let leftParenRe = regex::Regex::new(r"\s*\(\s*").unwrap();
-	let rightParenRe = regex::Regex::new(r"\s*\)\s*").unwrap();
-	let partialParsedCode = leftParenRe.replace_all(&code, " ( ");
-	(rightParenRe.replace_all(&partialParsedCode," ) ")).as_slice()
-}
+// fn tokenize() {
 
-fn tokenize() {
+// }
 
-}
+// fn read_from_tokens() {
 
-fn read_from_tokens() {
-
-}
+// }
 
 #[test]
-fn it_works() {
-	let input = "(begin (define r 10) (* pi (* r r)))";
-	let parsedCode = parse(input);
-	println!("{}", parsedCode);
-}
